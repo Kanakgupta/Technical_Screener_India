@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Scanner</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let selectedCategory = '';
+
+        function setCategory(category) {
+            selectedCategory = category;
+            document.getElementById('category').value = category;
+            alert(`Selected Category: ${category}`);
+        }
+
+        function submitForm() {
+            if (!selectedCategory) {
+                alert('Please select a category first.');
+                return;
+            }
+            document.getElementById('stock-form').submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>Stock Pattern Scanner</h1>
+    <form id="stock-form" action="/process" method="POST">
+        <input type="hidden" id="category" name="category" value=""> <!-- Hidden input for category -->
+
+        <h3>Select a Stock Category:</h3>
+        <div>
+            <button type="button" class="button" onclick="setCategory('NIFTY-500_TOP_STOCKS')">NIFTY-500 TOP STOCKS</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-COMMODITIES')">NIFTY COMMODITIES</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-CONSUMPTION')">NIFTY CONSUMPTION</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-DIGITAL')">NIFTY DIGITAL</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-DIVIDEND-OPPORTUNITIES')">NIFTY DIVIDEND OPPORTUNITIES</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-INFRASTRUCTURE')">NIFTY INFRASTRUCTURE</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-MANUFACTURING')">NIFTY MANUFACTURING</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-MICROCAP-250')">NIFTY MICROCAP 250</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-MIDSMALLCAP')">NIFTY MIDSMALLCAP</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-OIL-GAS')">NIFTY OIL & GAS</button>
+            <button type="button" class="button" onclick="setCategory('NIFTY-TATA-GROUP')">NIFTY TATA GROUP</button>
+        </div>
+
+        <h3>Select Patterns to Scan:</h3>
+        <input type="checkbox" name="patterns" value="rounding_bottom"> Rounding Bottom<br>
+        <input type="checkbox" name="patterns" value="head_and_shoulders"> Head and Shoulders<br>
+        <input type="checkbox" name="patterns" value="multiple_top_bottom"> Multiple Tops/Bottoms<br>
+        <input type="checkbox" name="patterns" value="bullish_engulfing"> Bullish Engulfing<br>
+        <input type="checkbox" name="patterns" value="bearish_engulfing"> Bearish Engulfing<br>
+        <input type="checkbox" name="patterns" value="morning_star"> Morning Star<br>
+        <input type="checkbox" name="patterns" value="evening_star"> Evening Star<br>
+        <input type="checkbox" name="patterns" value="rising_wedge"> Rising Wedge<br>
+        <input type="checkbox" name="patterns" value="falling_wedge"> Falling Wedge<br>
+        <input type="checkbox" name="patterns" value="inverted_head_and_shoulders"> Inverted Head and Shoulders<br>
+        
+        <br>
+        <input type="button" value="Submit" onclick="submitForm()">
+    </form>
+    
+    <!-- Display Results Here -->
+    <div id="results" style="margin-top: 20px;"></div>
+</body>
+</html>
